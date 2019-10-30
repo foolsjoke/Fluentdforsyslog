@@ -1,0 +1,35 @@
+<filter syslog.2.**>
+
+        @type record_modifier
+
+        <replace>
+                key date
+                expression /^(?<date>[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*).*$/
+                replace \k<date>
+        </replace>
+
+        <replace>
+                key servername
+                expression /^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*(?<servername>[A-Za-z]*).*$/
+                replace \k<servername>
+        </replace>
+
+        <replace>
+                key process
+                expression /^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*(?<process>[A-Za-z]*).*$/
+                replace \k<process>
+        </replace>
+
+        <replace>
+                key PID
+                expression /^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*[A-Za-z]*\[(?<PID>\d*)\]\:(?<message>.*)$/
+                replace \k<PID>
+        </replace>
+
+        <replace>
+                key log
+                expression /^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*[A-Za-z]*\[\d*\]\:\s*(?<message>.*)$/
+                replace \k<message>
+        </replace>
+
+</filter>
