@@ -1,0 +1,21 @@
+<filter syslog.3.**>
+
+        @type record_modifier
+
+        <record>
+
+                fluentd_date ${require 'date'; DateTime.now}
+
+                date ${require 'date'; DateTime.parse(record["message"].scan(/^(?<date>[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*).*$/)[0][0])}
+
+                servername ${record["message"].scan(/^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*(?<servername>[A-Za-z]*).*$/)[0][0] + ".itu.edu.tr"} # <<--- DUSUNULEBILIR?
+
+                process ${record["message"].scan(/^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*(?<process>[A-Za-z]*).*$/)[0][0]}
+
+                PID ${record["message"].scan(/^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*[A-Za-z]*\[(?<PID>\d*)\]\:(?<message>.*)$/)[0][0]}
+
+                log ${record["message"].scan(/^[A-Za-z]*\s*\d*\s*\d*\:\d*\:\d*\s*[A-Za-z]*\s*[A-Za-z]*\[\d*\]\:\s*(?<message>.*)$/)[0][0]}
+
+        </record>
+
+</filter>
