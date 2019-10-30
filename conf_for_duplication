@@ -1,0 +1,36 @@
+<match syslog.**>
+
+        @type copy
+        deep_copy true
+
+        <store>
+                @type rewrite_tag_filter
+
+                <rule>
+                        key message
+                        pattern /.*/
+                        tag syslog.1
+                </rule>
+        </store>
+
+        <store>
+                @type rewrite_tag_filter
+
+                <rule>
+                        key message
+                        pattern /.*/
+                        tag syslog.2
+                </rule>
+        </store>
+
+        <store>
+                @type rewrite_tag_filter
+
+                <rule>
+                        key message
+                        pattern /.*/
+                        tag syslog.3
+                </rule>
+        </store>
+
+</match>
