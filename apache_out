@@ -1,0 +1,22 @@
+<match apache.access.**>
+#apache.access.website
+        @type copy
+
+
+        <store>
+                @type file
+                path /var/LOGLAR/%Y-%m-%d/${tag[2]}.access
+                <format>
+                        @type single_value
+                        message_key message
+                </format>
+                <buffer tag,time>
+                        flush_mode immediate
+                        @type file
+                </buffer>
+                append true
+        </store>
+        <store>
+                @type stdout
+        </store>
+</match>
